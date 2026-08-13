@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>QSSC³ - Day 4 Activity Registration</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Fredoka:wght@600;700;800&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --mc-sky:       #007cff;
+      --mc-yellow:    #ffcc00;
+      --mc-blue-dark: #023047;
+      --voxel-dark:   #1c1d24;
+      --panel-white:  #fffaf0;
+    }
+
+    body {
+      font-family: "Nunito", sans-serif;
+      font-size: 1.15rem;
+      background-color: #2b2b2b;
+      background-image: 
+        linear-gradient(rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.35) 100%),
+        repeating-linear-gradient(45deg, #1b1b1b 0px, #1b1b1b 2px, #252525 2px, #252525 12px);
+      color: #ffffff;
+      overflow-x: hidden;
+      font-weight: 600;
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 16px;
+      background: #111111;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #8b8b8b;
+      border: 4px solid #111111;
+      box-shadow: inset -2px -2px 0px #555555, inset 2px 2px 0px #ffffff;
+    }
+
+    /* Header block */
+    nav {
+      background: rgba(30, 30, 35, 0.95);
+      border-bottom: 4px solid #000000;
+      padding: 14px 24px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    .nav-brand {
+      font-family: "Press Start 2P", monospace;
+      font-size: 11px;
+      color: var(--mc-yellow);
+      text-shadow: 2px 2px 0px #000000;
+      text-transform: uppercase;
+      text-align: center;
+      line-height: 1.4;
+    }
+    .nav-brand span {
+      color: #55ffff;
+      font-size: 8px;
+      display: block;
+      margin-top: 4px;
+    }
+
+    /* Core Panel styling */
+    .mc-dark-panel {
+      background: #1a1a24;
+      border: 4px solid #000000;
+      box-shadow: 6px 6px 0px #000000;
+      padding: 24px;
+      margin-bottom: 30px;
+    }
+
+    .mc-button {
+      font-family: "Press Start 2P", monospace;
+      font-size: 10px;
+      color: #ffffff;
+      background: #0ea5e9;
+      border: 3px solid #000000;
+      box-shadow: inset -3px -3px 0 #0284c7, inset 3px 3px 0 #38bdf8, 3px 3px 0 #000000;
+      padding: 14px 20px;
+      cursor: pointer;
+      text-transform: uppercase;
+      text-shadow: 1.5px 1.5px 0 #000000;
+      transition: transform 100ms ease, box-shadow 100ms ease;
+    }
+    .mc-button:active {
+      transform: translate(2px, 2px);
+      box-shadow: inset -3px -3px 0 #0284c7, inset 3px 3px 0 #38bdf8, 1px 1px 0 #000000;
+    }
+    .mc-button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .mc-input {
+      width: 100%;
+      padding: 12px 14px;
+      background: #09090d;
+      border: 3px solid #4a5568;
+      color: #ffffff;
+      font-size: 1.1rem;
+      border-radius: 0;
+      font-weight: 600;
+      transition: border-color 150ms ease;
+    }
+    .mc-input:focus {
+      outline: none;
+      border-color: var(--mc-yellow);
+    }
+
+    /* Form Step layouts */
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    .form-group label {
+      display: block;
+      font-family: "Fredoka", sans-serif;
+      font-size: 1.25rem;
+      color: var(--mc-yellow);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .form-group label span {
+      display: block;
+      font-size: 1.1rem;
+      color: #cbd5e1;
+      margin-top: 2px;
+      font-weight: normal;
+    }
+
+    .radio-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .radio-option {
+      background: #252532;
+      border: 2px solid #374151;
+      padding: 12px 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: background 150ms ease, border-color 150ms ease;
+    }
+    .radio-option.selected {
+      background: rgba(2, 48, 71, 0.6);
+      border-color: #0ea5e9;
+    }
+
+    .checkbox-option {
+      background: #252532;
+      border: 2px solid #374151;
+      padding: 12px 14px;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .checkbox-option.selected {
+      background: rgba(20, 83, 45, 0.4);
+      border-color: #22c55e;
+    }
+
+    .custom-indicator {
+      width: 20px;
+      height: 20px;
+      border: 2.5px solid #fff;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: bold;
+    }
+    .radio-option.selected .custom-indicator {
+      background: #0ea5e9;
+      border-color: #0ea5e9;
+      color: #fff;
+    }
+    .checkbox-option.selected .custom-indicator {
+      background: #22c55e;
+      border-color: #22c55e;
+      color: #fff;
+    }
+
+    /* Languages selection buttons */
+    .lang-btn {
+      padding: 24px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      font-family: "Fredoka", sans-serif;
+      text-transform: uppercase;
+      box-shadow: 4px 4px 0 #000;
+      border: 4px solid #000;
+      cursor: pointer;
+      transition: transform 100ms ease;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .lang-btn.ar {
+      background: #064e3b;
+      border-color: #059669;
+    }
+    .lang-btn.en {
+      background: #1e3a8a;
+      border-color: #2563eb;
+    }
+    .lang-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0 #000;
+    }
+
+    /* Alert and success box */
+    .success-badge {
+      font-size: 4rem;
+      margin-bottom: 16px;
+      display: inline-block;
+      animation: bounce 1.5s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-12px); }
+    }
+
+    /* RTL specific overrides */
+    .rtl {
+      direction: rtl;
+      text-align: right;
+    }
+
+    /* CSS grid rules list */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+      text-align: left;
+    }
+    .rtl .info-grid {
+      text-align: right;
+    }
+    .info-card {
+      background: #14141c;
+      border: 3px solid #000000;
+      padding: 14px;
+      box-shadow: 3px 3px 0 #000;
+    }
+    .info-card h4 {
+      color: var(--mc-yellow);
+      font-family: "Fredoka", sans-serif;
+      font-size: 1.2rem;
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-brand">
+      QSSC³ • OUTING ACTIVITY
+      <span>🏕️ CAMPING ÉTOILE DE MER</span>
+    </div>
+  </nav>
+
+  <div id="root" style="max-width: 800px; width: 100%; margin: 40px auto; padding: 0 20px; flex: 1;">
+    <div style="text-align: center; padding: 40px;">
+      <h3 style="font-family: 'Press Start 2P', monospace; font-size: 10px;">⏳ LOADING INTERFACE...</h3>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyC3dOGZ6J66oOPuxJbdviez5n-1jaliuLQ",
+      authDomain: "qssc3-d300f.firebaseapp.com",
+      projectId: "qssc3-d300f",
+      storageBucket: "qssc3-d300f.firebasestorage.app",
+      messagingSenderId: "902799612010",
+      appId: "1:902799612010:web:34e9a146990fb888435213",
+      measurementId: "G-F4M122F99Z"
+    };
+
+    let db = null;
+    try {
+      if (typeof firebase !== "undefined") {
+        firebase.initializeApp(firebaseConfig);
+        db = firebase.firestore();
+      }
+    } catch(e) {
+      console.error(e);
+    }
+
+    const translations = {
+      en: {
+        langTitle: "Choose your language",
+        descTitle: "Day 4 Outing Registration",
+        descText: "In the framework of Quanta Science Summer Camp 2026 - QSSC³, Quanta Club is organizing an recreational outing to Camping Étoile de Mer including transportation, entrance to the complex, and a horseback riding tour.",
+        date: "Date",
+        dateVal: "Day 4 (Thursday)",
+        departure: "Departure",
+        departureVal: "08:30 from Fac Centrale",
+        return: "Return",
+        returnVal: "16:30",
+        location: "Location",
+        locationVal: "Camping Étoile de Mer, Tipaza",
+        fee: "Fee",
+        feeVal: "2200 DA / person",
+        includes: "Includes: Transport + Horse riding + Complex access",
+        pleaseFill: "Please fill in this form with correct information, especially health-related data, to ensure a safe and comfortable experience for everyone.",
+        startBtn: "Start Registration",
+        fullName: "Full Name",
+        phone: "Phone Number",
+        email: "Email Address",
+        univ: "University / Faculty",
+        isParticipant: "Are you a QSSC³ participant?",
+        activityConfirm: "Do you confirm your participation in the horseback riding activity?",
+        triedBefore: "Have you tried horseback riding before?",
+        healthCondition: "Do you have any health conditions we should know about?",
+        explainHealth: "If yes, please explain:",
+        allergiesAsthma: "Do you have allergies, asthma, heart issues, back/knee problems, recent injury, or any condition that may affect horse riding?",
+        emergencyContact: "Emergency contact name and phone number",
+        agreeTitle: "Rules Agreement",
+        agree1: "I will respect the organizers' instructions.",
+        agree2: "I will respect the rules of the complex and horse-riding supervisors.",
+        agree3: "I understand that I must be on time at the meeting point.",
+        agree4: "I confirm that the health information I provided is correct.",
+        agree5: "I understand that the fee is 2200 DA/person.",
+        thingsToBring: "🎒 Things to bring",
+        thingsList: [
+          "Water bottle",
+          "Cap / hat",
+          "Sunscreen",
+          "Comfortable clothes & closed shoes",
+          "Light snack & personal medication",
+          "Good energy 😄"
+        ],
+        importantNotes: "⚠️ Important notes",
+        notesList: [
+          "Be on time: departure is at 08:30 from Fac Centrale.",
+          "Respect the organizers and horse-riding instructors.",
+          "Inform us of any health issues before starting the activity."
+        ],
+        submitBtn: "Submit Outing Form",
+        submitting: "Submitting...",
+        successTitle: "Registration Successful!",
+        successMsg: "Your registration for the Day 4 outing has been logged. Get ready for an amazing adventure!",
+        yes: "Yes",
+        no: "No",
+        yesConfirm: "Yes, I confirm",
+        notSure: "Not sure yet",
+        triedYes: "Yes",
+        triedNo: "No",
+        triedALittle: "A little",
+        validationErr: "Please fill all fields and accept all terms."
+      },
+      ar: {
+        langTitle: "اختر لغتك المفضلة",
+        descTitle: "تسجيل الخرجة الترفيهية - اليوم 4",
+        descText: "في إطار Quanta Science Summer Camp 2026 — QSSC³، ينظم نادي كوانتا خرجة ترفيهية إلى Camping Étoile de Mer تتضمن النقل، الدخول إلى المركب، وخرجة ركوب الخيل.",
+        date: "التاريخ",
+        dateVal: "اليوم 4 (الخميس)",
+        departure: "الانطلاق",
+        departureVal: "08:30 من الجامعة المركزية (Fac Centrale)",
+        return: "العودة",
+        returnVal: "16:30",
+        location: "المكان",
+        locationVal: "مركب نجم البحر، تيبازة (Camping Étoile de Mer)",
+        fee: "التكلفة",
+        feeVal: "2200 دج / للشخص",
+        includes: "يشمل: النقل + ركوب الخيل + الدخول إلى المركب",
+        pleaseFill: "يرجى ملء الاستمارة بمعلومات صحيحة، خاصة المعلومات الصحية، لضمان تنظيم النشاط في ظروف آمنة ومريحة للجميع.",
+        startBtn: "بدء التسجيل",
+        fullName: "الاسم الكامل",
+        phone: "رقم الهاتف",
+        email: "البريد الإلكتروني",
+        univ: "الجامعة أو الكلية",
+        isParticipant: "هل أنت مشارك في QSSC³؟",
+        activityConfirm: "هل تؤكد مشاركتك في خرجة ركوب الخيل؟",
+        triedBefore: "هل جربت ركوب الخيل من قبل؟",
+        healthCondition: "هل لديك أي مشكل صحي يجب أن نعرفه؟",
+        explainHealth: "إذا نعم، يرجى التوضيح:",
+        allergiesAsthma: "هل لديك حساسية، ربو، مشاكل في القلب، الظهر، الركبة، إصابة حديثة، أو أي حالة قد تؤثر على ركوب الخيل؟",
+        emergencyContact: "اسم ورقم شخص يمكن الاتصال به في حالة الطوارئ",
+        agreeTitle: "الموافقة على الشروط",
+        agree1: "سأحترم تعليمات المنظمين.",
+        agree2: "سأحترم قوانين المركب وتعليمات مؤطري ركوب الخيل.",
+        agree3: "أفهم أنه يجب علي الحضور في الوقت المحدد.",
+        agree4: "أؤكد أن المعلومات الصحية التي قدمتها صحيحة.",
+        agree5: "أفهم أن المبلغ هو 2200 دج للشخص.",
+        thingsToBring: "🎒 أشياء يجب إحضارها",
+        thingsList: [
+          "قارورة ماء",
+          "قبعة",
+          "واقي شمس",
+          "ملابس مريحة وحذاء مغلق",
+          "وجبة خفيفة وأدوية شخصية إن وجدت",
+          "طاقة إيجابية 😄"
+        ],
+        importantNotes: "⚠️ ملاحظات هامة",
+        notesList: [
+          "يرجى الالتزام بالوقت: الانطلاق على الساعة 08:30 من الجامعة المركزية.",
+          "احترام المنظمين ومؤطري ركوب الخيل.",
+          "أعلمنا بأي مشكل صحي قبل بدء النشاط."
+        ],
+        submitBtn: "إرسال الاستمارة",
+        submitting: "جاري الإرسال...",
+        successTitle: "تم التسجيل بنجاح!",
+        successMsg: "تم تسجيل معلوماتك بنجاح للمشاركة في خرجة اليوم الرابع. استعد لمغامرة رائعة!",
+        yes: "نعم",
+        no: "لا",
+        yesConfirm: "نعم، أؤكد مشاركتي",
+        notSure: "لست متأكداً بعد",
+        triedYes: "نعم",
+        triedNo: "لا",
+        triedALittle: "قليلاً",
+        validationErr: "يرجى ملء جميع الحقول والموافقة على كل الشروط."
+      }
+    };
+
+    function App() {
+      const [lang, setLang] = useState(null); // 'ar' | 'en'
+      const [step, setStep] = useState(0); // 0: Lang, 1: Info, 2: Form, 3: Success
+      const [loading, setLoading] = useState(false);
+      const [error, setError] = useState("");
+
+      useEffect(() => {
+        if (typeof firebase !== "undefined") {
+          const unsubscribe = firebase.auth().onAuthStateChanged((u) => {
+            if (!u) {
+              const readonlyEmail = "readonly@quanta.com";
+              const readonlyPass = "readonly_visitor";
+              firebase.auth().signInWithEmailAndPassword(readonlyEmail, readonlyPass).catch((err) => {
+                console.error("Failed to sign in as guest:", err);
+              });
+            }
+          });
+          return () => unsubscribe();
+        }
+      }, []);
+
+      // Form State
+      const [fullName, setFullName] = useState("");
+      const [phone, setPhone] = useState("");
+      const [email, setEmail] = useState("");
+      const [univ, setUniv] = useState("");
+      const [isParticipant, setIsParticipant] = useState(""); // 'Yes' | 'No'
+      const [activityConfirm, setActivityConfirm] = useState(""); // 'Yes' | 'No'
+      const [triedBefore, setTriedBefore] = useState(""); // 'Yes' | 'No' | 'ALittle'
+      const [healthCondition, setHealthCondition] = useState(""); // 'Yes' | 'No'
+      const [explainHealth, setExplainHealth] = useState("");
+      const [allergiesAsthma, setAllergiesAsthma] = useState(""); // 'Yes' | 'No'
+      const [emergencyContact, setEmergencyContact] = useState("");
+      const [lastDocId, setLastDocId] = useState("");
+      const [feeConfirmed, setFeeConfirmed] = useState(false);
+      const [showFeeModal, setShowFeeModal] = useState(false);
+
+      const handleConfirmFee = async () => {
+        if (!db || !lastDocId) return;
+        setLoading(true);
+        try {
+          const confirmId = "fee_confirm_" + lastDocId;
+          await db.collection("quiz_submissions").doc(confirmId).set({
+            type: "fee_confirmation",
+            outingDocId: lastDocId,
+            feeConfirmed: true,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+          });
+          setFeeConfirmed(true);
+          setShowFeeModal(true);
+        } catch (e) {
+          console.error("Error confirming fee:", e);
+          alert("Error: " + e.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      // Checkboxes agreement
+      const [agreements, setAgreements] = useState({
+        rule1: false,
+        rule2: false,
+        rule3: false,
+        rule4: false,
+        rule5: false
+      });
+
+      const t = lang ? translations[lang] : null;
+
+      const handleLangSelect = (selectedLang) => {
+        setLang(selectedLang);
+        setStep(1);
+      };
+
+      const handleToggleCheckbox = (key) => {
+        setAgreements(prev => ({ ...prev, [key]: !prev[key] }));
+      };
+
+      const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError("");
+
+        // Validate
+        const missing = [];
+        if (!fullName.trim()) missing.push(isRtl ? "الاسم الكامل" : "Full Name");
+        if (!phone.trim()) missing.push(isRtl ? "رقم الهاتف" : "Phone Number");
+        if (!email.trim()) missing.push(isRtl ? "البريد الإلكتروني" : "Email");
+        if (!univ.trim()) missing.push(isRtl ? "الجامعة" : "University");
+        if (!isParticipant) missing.push(isRtl ? "هل أنت مشارك" : "Are you a participant");
+        if (!activityConfirm) missing.push(isRtl ? "تأكيد النشاط" : "Activity confirmation");
+        if (!triedBefore) missing.push(isRtl ? "هل جربت ركوب الخيل" : "Tried horse riding before");
+        if (!healthCondition) missing.push(isRtl ? "المشكل الصحي" : "Health condition");
+        if (!allergiesAsthma) missing.push(isRtl ? "الحساسية والربو" : "Allergies/Asthma/etc");
+        if (!emergencyContact.trim()) missing.push(isRtl ? "جهة اتصال الطوارئ" : "Emergency contact");
+
+        const allChecked = Object.values(agreements).every(val => val === true);
+        if (!allChecked) missing.push(isRtl ? "الموافقة على الشروط" : "Terms agreement");
+
+        if (missing.length > 0) {
+          setError((isRtl ? "يرجى ملء الحقول التالية: " : "Please fill or accept the following: ") + missing.join(", "));
+          return;
+        }
+
+        setLoading(true);
+        try {
+            if (!db) {
+              setError("Database connection error.");
+              return;
+            }
+            const docId = "outing_" + Math.random().toString(36).substr(2, 9) + "_" + Date.now();
+            await db.collection("quiz_submissions").doc(docId).set({
+              type: "outing_registration",
+              fullName: fullName.trim(),
+              phone: phone.trim(),
+              email: email.trim().toLowerCase(),
+              univ: univ.trim(),
+              isParticipant,
+              activityConfirm,
+              triedBefore,
+              healthCondition,
+              explainHealth: healthCondition === "Yes" ? explainHealth.trim() : "",
+              allergiesAsthma,
+              emergencyContact: emergencyContact.trim(),
+              createdAt: firebase.firestore.FieldValue.serverTimestamp()
+            });
+            setLastDocId(docId);
+            setStep(3);
+        } catch (err) {
+          console.error(err);
+          setError("Failed to submit: " + err.message);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      if (step === 0) {
+        return (
+          <div className="mc-dark-panel" style={{ maxWidth: "500px", margin: "40px auto", textAlign: "center" }}>
+            <h2 style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "11px", color: "var(--mc-yellow)", marginBottom: "30px" }}>
+              CHOOSE LANGUAGE / اختر اللغة
+            </h2>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "16px" }}>
+              <button onClick={() => handleLangSelect("ar")} className="lang-btn ar">
+                <span>🇸🇦</span>
+                <span>العربية</span>
+              </button>
+              <button onClick={() => handleLangSelect("en")} className="lang-btn en">
+                <span>🇬🇧</span>
+                <span>English</span>
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      const isRtl = lang === "ar";
+
+      if (step === 1) {
+        return (
+          <div className={`mc-dark-panel ${isRtl ? "rtl" : ""}`} style={{ textRendering: "optimizeLegibility" }}>
+            <h2 style={{ fontFamily: "Fredoka, sans-serif", fontSize: "2rem", color: "var(--mc-yellow)", marginBottom: "16px", fontWeight: "800" }}>
+              {t.descTitle}
+            </h2>
+            <p style={{ fontSize: "1.25rem", color: "#cbd5e1", lineHeight: "1.6", marginBottom: "20px" }}>
+              {t.descText}
+            </p>
+
+            <div className="info-grid">
+              <div className="info-card">
+                <h4>🗓️ {t.date}</h4>
+                <p style={{ color: "#fff" }}>{t.dateVal}</p>
+              </div>
+              <div className="info-card">
+                <h4>⏰ {t.departure}</h4>
+                <p style={{ color: "#fff" }}>{t.departureVal}</p>
+              </div>
+              <div className="info-card">
+                <h4>⏰ {t.return}</h4>
+                <p style={{ color: "#fff" }}>{t.returnVal}</p>
+              </div>
+              <div className="info-card">
+                <h4>📍 {t.location}</h4>
+                <p style={{ color: "#fff" }}>
+                  <a 
+                    href="https://www.google.com/maps/search/?api=1&query=Camping+Familial+Etoile+de+Mer+Tipaza" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    style={{ color: "#38bdf8", textDecoration: "underline", fontWeight: "bold" }}
+                  >
+                    {t.locationVal} 🗺️
+                  </a>
+                </p>
+              </div>
+              <div className="info-card" style={{ gridColumn: "span 2" }}>
+                <h4>💰 {t.fee}</h4>
+                <p style={{ color: "#fff", fontWeight: "bold" }}>{t.feeVal}</p>
+                <span style={{ fontSize: "0.85rem", color: "#38bdf8", display: "block", marginTop: "4px" }}>{t.includes}</span>
+              </div>
+            </div>
+
+            <p style={{ fontSize: "1.15rem", color: "var(--mc-yellow)", marginTop: "24px", lineHeight: "1.5", borderLeft: isRtl ? "none" : "4px solid var(--mc-yellow)", borderRight: isRtl ? "4px solid var(--mc-yellow)" : "none", paddingLeft: isRtl ? "none" : "14px", paddingRight: isRtl ? "14px" : "none" }}>
+              {t.pleaseFill}
+            </p>
+
+            <div style={{ marginTop: "30px", display: "flex", gap: "10px", justifyContent: isRtl ? "flex-start" : "flex-end" }}>
+              <button onClick={() => setStep(0)} className="mc-button" style={{ background: "#7f1d1d", borderInside: "inset -3px -3px 0 #7f1d1d" }}>
+                {isRtl ? "◀ عودة" : "◀ Back"}
+              </button>
+              <button onClick={() => setStep(2)} className="mc-button">
+                {t.startBtn}
+              </button>
+            </div>
+          </div>
+        );
+      }
+
+      if (step === 2) {
+        return (
+          <form onSubmit={handleSubmit} className={`mc-dark-panel ${isRtl ? "rtl" : ""}`} style={{ background: "#1c1c24" }}>
+            <h2 style={{ fontFamily: "Fredoka, sans-serif", fontSize: "1.8rem", color: "var(--mc-yellow)", marginBottom: "24px", fontWeight: "800", borderBottom: "3px solid #000", paddingBottom: "10px" }}>
+              {isRtl ? "📝 استمارة التسجيل" : "📝 Outing Application"}
+            </h2>
+
+            {error && (
+              <div style={{ background: "#7f1d1d", border: "3px solid #b91c1c", color: "#fca5a5", padding: "14px", marginBottom: "20px", fontWeight: "bold", fontFamily: "monospace", fontSize: "1rem" }}>
+                ⚠️ {error}
+              </div>
+            )}
+
+            {/* Step 1: Personal Information */}
+            <h3 style={{ color: "#38bdf8", fontFamily: "Fredoka, sans-serif", fontSize: "1.4rem", marginBottom: "16px", borderBottom: "1.5px solid #374151", paddingBottom: "4px" }}>
+              1. {isRtl ? "المعلومات الشخصية" : "Personal Information"}
+            </h3>
+
+            <div className="form-group">
+              <label>
+                {t.fullName}
+                <span>{isRtl ? "الاسم الكامل" : "First name and last name"}</span>
+              </label>
+              <input type="text" className="mc-input" value={fullName} onChange={e => setFullName(e.target.value)} required placeholder={isRtl ? "مثال: ساري أيوب" : "e.g. Sarri Ayoub"} />
+            </div>
+
+            <div className="form-group">
+              <label>
+                {t.phone}
+                <span>{isRtl ? "رقم الهاتف" : "Phone number"}</span>
+              </label>
+              <input type="tel" className="mc-input" value={phone} onChange={e => setPhone(e.target.value)} required placeholder="e.g. 0555xxxxxx" />
+            </div>
+
+            <div className="form-group">
+              <label>
+                {t.email}
+                <span>{isRtl ? "البريد الإلكتروني" : "Email address"}</span>
+              </label>
+              <input type="email" className="mc-input" value={email} onChange={e => setEmail(e.target.value)} required placeholder="e.g. you@domain.com" />
+            </div>
+
+            <div className="form-group">
+              <label>
+                {t.univ}
+                <span>{isRtl ? "الجامعة أو الكلية" : "Your university/major"}</span>
+              </label>
+              <input type="text" className="mc-input" value={univ} onChange={e => setUniv(e.target.value)} required placeholder="e.g. USTHB - Faculty of Physics" />
+            </div>
+
+            <div className="form-group">
+              <label>
+                {t.isParticipant}
+              </label>
+              <div className="radio-group">
+                <div className={`radio-option ${isParticipant === "Yes" ? "selected" : ""}`} onClick={() => setIsParticipant("Yes")}>
+                  <span className="custom-indicator">{isParticipant === "Yes" ? "✓" : ""}</span>
+                  <span>{t.yes}</span>
+                </div>
+                <div className={`radio-option ${isParticipant === "No" ? "selected" : ""}`} onClick={() => setIsParticipant("No")}>
+                  <span className="custom-indicator">{isParticipant === "No" ? "✓" : ""}</span>
+                  <span>{t.no}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Step 2: Activity Confirmation */}
+            <h3 style={{ color: "#38bdf8", fontFamily: "Fredoka, sans-serif", fontSize: "1.4rem", marginTop: "30px", marginBottom: "16px", borderBottom: "1.5px solid #374151", paddingBottom: "4px" }}>
+              2. {isRtl ? "تأكيد النشاط" : "Activity Confirmation"}
+            </h3>
+
+            <div className="form-group">
+              <label>
+                {t.activityConfirm}
+              </label>
+              <div className="radio-group">
+                <div className={`radio-option ${activityConfirm === "Yes" ? "selected" : ""}`} onClick={() => setActivityConfirm("Yes")}>
+                  <span className="custom-indicator">{activityConfirm === "Yes" ? "✓" : ""}</span>
+                  <span>{t.yesConfirm}</span>
+                </div>
+                <div className={`radio-option ${activityConfirm === "No" ? "selected" : ""}`} onClick={() => setActivityConfirm("No")}>
+                  <span className="custom-indicator">{activityConfirm === "No" ? "✓" : ""}</span>
+                  <span>{t.notSure}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label>
+                {t.triedBefore}
+              </label>
+              <div className="radio-group">
+                <div className={`radio-option ${triedBefore === "Yes" ? "selected" : ""}`} onClick={() => setTriedBefore("Yes")}>
+                  <span className="custom-indicator">{triedBefore === "Yes" ? "✓" : ""}</span>
+                  <span>{t.triedYes}</span>
+                </div>
+                <div className={`radio-option ${triedBefore === "No" ? "selected" : ""}`} onClick={() => setTriedBefore("No")}>
+                  <span className="custom-indicator">{triedBefore === "No" ? "✓" : ""}</span>
+                  <span>{t.triedNo}</span>
+                </div>
+                <div className={`radio-option ${triedBefore === "ALittle" ? "selected" : ""}`} onClick={() => setTriedBefore("ALittle")}>
+                  <span className="custom-indicator">{triedBefore === "ALittle" ? "✓" : ""}</span>
+                  <span>{t.triedALittle}</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Step 3: Health & Safety */}
+            <h3 style={{ color: "#38bdf8", fontFamily: "Fredoka, sans-serif", fontSize: "1.4rem", marginTop: "30px", marginBottom: "16px", borderBottom: "1.5px solid #374151", paddingBottom: "4px" }}>
+              3. {isRtl ? "الصحة والسلامة" : "Health & Safety"}
+            </h3>
+
+            <div className="form-group">
+              <label>
+                {t.healthCondition}
+              </label>
+              <div className="radio-group">
+                <div className={`radio-option ${healthCondition === "No" ? "selected" : ""}`} onClick={() => setHealthCondition("No")}>
+                  <span className="custom-indicator">{healthCondition === "No" ? "✓" : ""}</span>
+                  <span>{t.no}</span>
+                </div>
+                <div className={`radio-option ${healthCondition === "Yes" ? "selected" : ""}`} onClick={() => setHealthCondition("Yes")}>
+                  <span className="custom-indicator">{healthCondition === "Yes" ? "✓" : ""}</span>
+                  <span>{t.yes}</span>
+                </div>
+              </div>
+            </div>
+
+            {healthCondition === "Yes" && (
+              <div className="form-group">
+                <label>{t.explainHealth}</label>
+                <textarea className="mc-input" value={explainHealth} onChange={e => setExplainHealth(e.target.value)} required rows={3} style={{ fontFamily: "inherit" }} placeholder="..." />
+              </div>
+            )}
+
+            <div className="form-group">
+              <label>
+                {t.allergiesAsthma}
+              </label>
+              <div className="radio-group">
+                <div className={`radio-option ${allergiesAsthma === "No" ? "selected" : ""}`} onClick={() => setAllergiesAsthma("No")}>
+                  <span className="custom-indicator">{allergiesAsthma === "No" ? "✓" : ""}</span>
+                  <span>{t.no}</span>
+                </div>
+                <div className={`radio-option ${allergiesAsthma === "Yes" ? "selected" : ""}`} onClick={() => setAllergiesAsthma("Yes")}>
+                  <span className="custom-indicator">{allergiesAsthma === "Yes" ? "✓" : ""}</span>
+                  <span>{t.yes}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label>
+                {t.emergencyContact}
+              </label>
+              <input type="text" className="mc-input" value={emergencyContact} onChange={e => setEmergencyContact(e.target.value)} required placeholder="e.g. My father (0550xxxxxx)" />
+            </div>
+
+            {/* Step 4: Rules Agreement */}
+            <h3 style={{ color: "#38bdf8", fontFamily: "Fredoka, sans-serif", fontSize: "1.4rem", marginTop: "30px", marginBottom: "16px", borderBottom: "1.5px solid #374151", paddingBottom: "4px" }}>
+              4. {t.agreeTitle}
+            </h3>
+
+            <div className="checkbox-option-group">
+              <div className={`checkbox-option ${agreements.rule1 ? "selected" : ""}`} onClick={() => handleToggleCheckbox("rule1")}>
+                <span className="custom-indicator">{agreements.rule1 ? "✓" : ""}</span>
+                <span>{t.agree1}</span>
+              </div>
+              <div className={`checkbox-option ${agreements.rule2 ? "selected" : ""}`} onClick={() => handleToggleCheckbox("rule2")}>
+                <span className="custom-indicator">{agreements.rule2 ? "✓" : ""}</span>
+                <span>{t.agree2}</span>
+              </div>
+              <div className={`checkbox-option ${agreements.rule3 ? "selected" : ""}`} onClick={() => handleToggleCheckbox("rule3")}>
+                <span className="custom-indicator">{agreements.rule3 ? "✓" : ""}</span>
+                <span>{t.agree3}</span>
+              </div>
+              <div className={`checkbox-option ${agreements.rule4 ? "selected" : ""}`} onClick={() => handleToggleCheckbox("rule4")}>
+                <span className="custom-indicator">{agreements.rule4 ? "✓" : ""}</span>
+                <span>{t.agree4}</span>
+              </div>
+              <div className={`checkbox-option ${agreements.rule5 ? "selected" : ""}`} onClick={() => handleToggleCheckbox("rule5")}>
+                <span className="custom-indicator">{agreements.rule5 ? "✓" : ""}</span>
+                <span>{t.agree5}</span>
+              </div>
+            </div>
+
+            <div style={{ marginTop: "30px", display: "flex", gap: "10px", justifyContent: isRtl ? "flex-start" : "flex-end" }}>
+              <button type="button" onClick={() => setStep(1)} className="mc-button" style={{ background: "#7f1d1d" }}>
+                {isRtl ? "◀ عودة" : "◀ Back"}
+              </button>
+              <button type="submit" className="mc-button" disabled={loading} style={{ background: "#4caf50", shadowColor: "#1b5e20" }}>
+                {loading ? t.submitting : t.submitBtn}
+              </button>
+            </div>
+          </form>
+        );
+      }
+
+      if (step === 3) {
+        return (
+          <div className={`mc-dark-panel ${isRtl ? "rtl" : ""}`} style={{ textAlign: "center", padding: "40px" }}>
+            <span className="success-badge">🟢</span>
+            <h2 style={{ fontFamily: "Fredoka, sans-serif", fontSize: "2.2rem", color: "#22c55e", marginBottom: "16px", fontWeight: "800" }}>
+              {t.successTitle}
+            </h2>
+            <p style={{ fontSize: "1.3rem", color: "#cbd5e1", lineHeight: "1.6", marginBottom: "30px", maxWidth: "600px", margin: "0 auto" }}>
+              {t.successMsg}
+            </p>
+
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "20px", marginTop: "30px", textDirection: "ltr", textAlign: "left" }} className={isRtl ? "rtl" : ""}>
+              <div className="info-card" style={{ background: "#13131c" }}>
+                <h4 style={{ fontSize: "1.15rem", fontFamily: "Fredoka, sans-serif" }}>{t.thingsToBring}</h4>
+                <ul style={{ listStyleType: "none", padding: 0, marginTop: "10px", fontSize: "1.05rem", lineHeight: "1.5" }}>
+                  {t.thingsList.map((item, index) => (
+                    <li key={index} style={{ marginBottom: "6px" }}>• {item}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="info-card" style={{ background: "#13131c" }}>
+                <h4 style={{ fontSize: "1.15rem", fontFamily: "Fredoka, sans-serif" }}>{t.importantNotes}</h4>
+                <ul style={{ listStyleType: "none", padding: 0, marginTop: "10px", fontSize: "1.05rem", lineHeight: "1.5" }}>
+                  {t.notesList.map((item, index) => (
+                    <li key={index} style={{ marginBottom: "6px" }}>• {item}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            {!feeConfirmed ? (
+              <button 
+                onClick={handleConfirmFee} 
+                className="mc-button" 
+                disabled={loading}
+                style={{ 
+                  marginTop: "30px", 
+                  background: "var(--mc-yellow)", 
+                  color: "#023047", 
+                  borderColor: "#000",
+                  textShadow: "none", 
+                  boxShadow: "inset -4px -4px 0 #b38f00, inset 4px 4px 0 #ffe066, 4px 4px 0 #000" 
+                }}
+              >
+                {loading ? (isRtl ? "⏳ جاري التأكيد..." : "⏳ CONFIRMING...") : (isRtl ? "💰 تأكيد الرسوم: 2200 دج" : "💰 CONFIRM FEE: 2200 DA")}
+              </button>
+            ) : (
+              <button 
+                disabled 
+                className="mc-button" 
+                style={{ 
+                  marginTop: "30px", 
+                  background: "#15803d", 
+                  borderColor: "#000",
+                  boxShadow: "inset -4px -4px 0 #166534, inset 4px 4px 0 #4ade80, 4px 4px 0 #000",
+                  cursor: "default" 
+                }}
+              >
+                {isRtl ? "✅ تم تأكيد دفع 2200 دج" : "✅ FEE CONFIRMED: 2200 DA"}
+              </button>
+            )}
+
+            {showFeeModal && (
+              <div style={{
+                position: "fixed",
+                inset: 0,
+                background: "rgba(0,0,0,0.85)",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                zIndex: 2000,
+                padding: "20px"
+              }}>
+                <div className="mc-dark-panel" style={{ maxWidth: "480px", width: "100%", textAlign: "center", background: "#1a1a24" }}>
+                  <div style={{ fontSize: "3rem", marginBottom: "14px" }}>💰</div>
+                  <h3 style={{ fontFamily: "Fredoka, sans-serif", fontSize: "1.8rem", color: "var(--mc-yellow)", marginBottom: "12px" }}>
+                    {isRtl ? "تمت عملية التأكيد!" : "Confirmation Saved!"}
+                  </h3>
+                  <p style={{ color: "#cbd5e1", fontSize: "1.2rem", lineHeight: "1.6", marginBottom: "24px" }}>
+                    {isRtl ? "يرجى تسليم مبلغ 2200 دج لمنظمي المخيم (QSSC³) قبل اليوم الرابع لإنهاء الحجز. شكراً لك!" : "Please deliver the 2200 DA fee to the camp organizers before Day 4 to complete your reservation. Thank you!"}
+                  </p>
+                  <button className="mc-button" onClick={() => setShowFeeModal(false)} style={{ width: "100%" }}>
+                    {isRtl ? "حسناً، فهمت" : "Got it!"}
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        );
+      }
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render((<App />));
+  </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+[
+  {
+    "fullName": "Steve Blockwell",
+    "email": "steve@minecraft.net",
+    "phone": "+123456789",
+    "goal": "Building awesome blocky apps!",
+    "timestamp": "2026-07-01T07:25:55.968Z"
+  },
+  {
+    "fullName": "Alex RTX",
+    "email": "alex@rtx.net",
+    "phone": "+987654321",
+    "goal": "Creating beautiful ray-traced layouts!",
+    "timestamp": "2026-07-01T07:35:35.356Z"
+  },
+  {
+    "fullName": "Steve Explorer",
+    "email": "explorer@voxel.org",
+    "phone": "+11223344",
+    "goal": "Testing Playful Voxel style integration!",
+    "timestamp": "2026-07-01T08:07:05.271Z"
+  },
+  {
+    "fullName": "Steve Builder",
+    "email": "builder@block.net",
+    "phone": "+11122233",
+    "goal": "Building authentic blocky structures!",
+    "timestamp": "2026-07-01T08:35:22.329Z"
+  },
+  {
+    "fullName": "Steve Typography",
+    "email": "type@minecraft.net",
+    "phone": "+55566677",
+    "goal": "Verifying typography optimizations!",
+    "timestamp": "2026-07-01T08:42:28.505Z"
+  },
+  {
+    "fullName": "Steve Centered",
+    "email": "center@block.net",
+    "phone": "+77788899",
+    "goal": "Testing centered register button and logos capsule banner!",
+    "timestamp": "2026-07-01T14:51:38.887Z"
+  },
+  {
+    "fullName": "Alex Premium",
+    "email": "premium@block.net",
+    "phone": "+88899900",
+    "goal": "Testing premium layout from scratch!",
+    "timestamp": "2026-07-01T15:01:51.454Z"
+  },
+  {
+    "fullName": "Steve Asymmetric",
+    "email": "asym@block.net",
+    "phone": "+33344455",
+    "goal": "Testing asymmetric layout integration!",
+    "timestamp": "2026-07-01T15:03:55.303Z"
+  },
+  {
+    "fullName": "Steve Revised",
+    "email": "revised@block.net",
+    "phone": "+44455566",
+    "goal": "Testing logos in header bar and new workshop icons!",
+    "timestamp": "2026-07-01T16:56:44.461Z"
+  },
+  {
+    "fullName": "Steve Emerald",
+    "email": "emerald@block.net",
+    "phone": "+55566600",
+    "goal": "Testing emerald register button and alignment!",
+    "timestamp": "2026-07-01T16:58:17.553Z"
+  },
+  {
+    "fullName": "Steve Committed",
+    "email": "committed@block.net",
+    "phone": "+12345678",
+    "goal": "Testing studentId and commitment checkbox inputs!",
+    "timestamp": "2026-07-01T17:07:34.380Z"
+  }
+]

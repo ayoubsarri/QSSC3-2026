@@ -1,0 +1,24 @@
+{
+  "name": "QSSC 3",
+  "short_name": "QSSC 3",
+  "description": "Participant and Admin Portal for the Quanta STEM Summer Camp 3.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#023047",
+  "theme_color": "#023047",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    }
+  ]
+}

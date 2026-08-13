@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Preview</title>
+  <style>
+    body { font-family: sans-serif; background: #222; color: #fff; padding: 20px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+    .card { background: #333; padding: 10px; border-radius: 8px; text-align: center; }
+    .card img { max-width: 100%; max-height: 250px; border: 1px solid #555; }
+    .full-img { text-align: center; margin-bottom: 40px; }
+    .full-img img { max-width: 400px; border: 2px solid #ffaa00; }
+  </style>
+</head>
+<body>
+  <h1>Image Previews</h1>
+  
+  <div class="full-img">
+    <h3>email_img_1.png (Full Poster)</h3>
+    <img src="images/email_img_1.png" alt="Full Poster">
+  </div>
+
+  <div class="grid">
+    <div class="card">
+      <h4>email_img_2.png</h4>
+      <img src="images/email_img_2.png" alt="Img 2">
+    </div>
+    <div class="card">
+      <h4>email_img_3.png</h4>
+      <img src="images/email_img_3.png" alt="Img 3">
+    </div>
+    <div class="card">
+      <h4>email_img_4.png</h4>
+      <img src="images/email_img_4.png" alt="Img 4">
+    </div>
+    <div class="card">
+      <h4>email_img_5.png</h4>
+      <img src="images/email_img_5.png" alt="Img 5">
+    </div>
+    <div class="card">
+      <h4>email_img_6.png</h4>
+      <img src="images/email_img_6.png" alt="Img 6">
+    </div>
+    <div class="card">
+      <h4>email_img_7.png</h4>
+      <img src="images/email_img_7.png" alt="Img 7">
+    </div>
+    <div class="card">
+      <h4>email_img_8.png</h4>
+      <img src="images/email_img_8.png" alt="Img 8">
+    </div>
+    <div class="card">
+      <h4>email_img_9.png</h4>
+      <img src="images/email_img_9.png" alt="Img 9">
+    </div>
+    <div class="card">
+      <h4>email_img_10.png</h4>
+      <img src="images/email_img_10.png" alt="Img 10">
+    </div>
+  </div>
+</body>
+</html>

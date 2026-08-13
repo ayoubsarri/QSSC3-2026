@@ -1,0 +1,306 @@
+            {/* Overall Camp Survey Tab */}
+            {feedbackSubTab === "camp" && (
+              <div>
+                <h4 style={{ fontFamily: "'Press Start 2P', monospace", fontSize: "9px", color: "#38bdf8", marginBottom: "20px", textAlign: "center" }}>
+                  🏆 OVERALL CAMP SURVEY (QSSC³ 2026)
+                </h4>
+
+                {campFeedback ? (
+                  <div style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+                    <div style={{ background: "#1e293b", border: "3px solid #000", padding: "20px", boxShadow: "4px 4px 0 #000", textAlign: "center" }}>
+                      <span style={{ fontSize: "3rem" }}>🎉</span>
+                      <h4 style={{ color: "#22c55e", fontSize: "1.3rem", fontWeight: "bold", marginTop: "10px", marginBottom: "12px" }}>
+                        CAMP SURVEY COMPLETED!
+                      </h4>
+                      <p style={{ color: "#cbd5e1", fontSize: "1.1rem", lineHeight: "1.5", margin: 0 }}>
+                        Thank you for completing the final survey. Your feedback is highly appreciated and will help us build even better camp experiences!
+                      </p>
+                    </div>
+
+                    <div style={{ background: "#091b29", border: "3px solid #0284c7", padding: "20px" }}>
+                      <h5 style={{ color: "var(--mc-yellow)", fontSize: "1.15rem", marginBottom: "14px", fontWeight: "bold", textTransform: "uppercase" }}>
+                        📝 Your Responses:
+                      </h5>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "10px", fontSize: "1.05rem" }}>
+                        <div>🏆 Overall Camp Experience: <strong>{"⭐".repeat(campFeedback.campRating)} ({campFeedback.campRating}/5)</strong></div>
+                        <div>1️⃣ STEM & Logic (Ayoub Sarri): <strong>{"⭐".repeat(campFeedback.stemRating)} ({campFeedback.stemRating}/5)</strong></div>
+                        <div>2️⃣ Calculator Beat (Walid Henni): <strong>{"⭐".repeat(campFeedback.calcRating)} ({campFeedback.calcRating}/5)</strong></div>
+                        <div>3️⃣ Content Creation (Youcef Lezzoum): <strong>{"⭐".repeat(campFeedback.contentRating)} ({campFeedback.contentRating}/5)</strong></div>
+                        <div>4️⃣ Career Development (Rima Chaabna): <strong>{"⭐".repeat(campFeedback.careerRating)} ({campFeedback.careerRating}/5)</strong></div>
+                        <div>5️⃣ Robotics & Electronics (Alaa Djema): <strong>{"⭐".repeat(campFeedback.roboticsRating)} ({campFeedback.roboticsRating}/5)</strong></div>
+                        <div>6️⃣ Recreational Outing (Tipaza): <strong>{"⭐".repeat(campFeedback.outingRating)} ({campFeedback.outingRating}/5)</strong></div>
+                        <div>7️⃣ Healthy Food (Dr. Hefsa): <strong>{"⭐".repeat(campFeedback.foodRating)} ({campFeedback.foodRating}/5)</strong></div>
+                        <div>8️⃣ Think Like a Doctor (Amira Touileb): <strong>{"⭐".repeat(campFeedback.doctorRating)} ({campFeedback.doctorRating}/5)</strong></div>
+                        <div>9️⃣ Web Dev & Vibe Coding (Ayoub Sarri): <strong>{"⭐".repeat(campFeedback.webdevRating)} ({campFeedback.webdevRating}/5)</strong></div>
+                        <div>🔟 3D Printing (Youcef Lezzoum): <strong>{"⭐".repeat(campFeedback.printingRating)} ({campFeedback.printingRating}/5)</strong></div>
+                        <div>🧪 Chemistry Workshop (Lyna, Sarah, Chaima): <strong>{"⭐".repeat(campFeedback.chemistryRating)} ({campFeedback.chemistryRating}/5)</strong></div>
+                        <div>📋 Organization & Logistics: <strong>{"⭐".repeat(campFeedback.orgRating)} ({campFeedback.orgRating}/5)</strong></div>
+                        
+                        {campFeedback.favoriteMoment && (
+                          <div style={{ marginTop: "10px", borderTop: "1px dashed #374151", paddingTop: "10px" }}>
+                            <div style={{ color: "#38bdf8", fontWeight: "bold", fontSize: "1rem" }}>❤️ Favorite Moment / Activity:</div>
+                            <p style={{ margin: "5px 0 0 0", fontStyle: "italic", color: "#e2e8f0" }}>"{campFeedback.favoriteMoment}"</p>
+                          </div>
+                        )}
+                        {campFeedback.suggestions && (
+                          <div style={{ marginTop: "10px", borderTop: "1px dashed #374151", paddingTop: "10px" }}>
+                            <div style={{ color: "#38bdf8", fontWeight: "bold", fontSize: "1rem" }}>🚀 Suggestions for Improvement:</div>
+                            <p style={{ margin: "5px 0 0 0", fontStyle: "italic", color: "#e2e8f0" }}>"{campFeedback.suggestions}"</p>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div>
+                    <p style={{ fontSize: "1.15rem", color: "#cbd5e1", lineHeight: "1.6", marginBottom: "25px", textAlign: "center" }}>
+                      Congratulations on completing <strong>QSSC³ 2026</strong>! Please help us capture the full journey by rating the workshops, outing, and logistics.
+                    </p>
+
+                    <form 
+                      onSubmit={async (e) => {
+                        e.preventDefault();
+                        const form = e.target;
+                        const campRating = parseInt(form.elements.campRating.value);
+                        const stemRating = parseInt(form.elements.stemRating.value);
+                        const calcRating = parseInt(form.elements.calcRating.value);
+                        const contentRating = parseInt(form.elements.contentRating.value);
+                        const careerRating = parseInt(form.elements.careerRating.value);
+                        const roboticsRating = parseInt(form.elements.roboticsRating.value);
+                        const outingRating = parseInt(form.elements.outingRating.value);
+                        const foodRating = parseInt(form.elements.foodRating.value);
+                        const doctorRating = parseInt(form.elements.doctorRating.value);
+                        const webdevRating = parseInt(form.elements.webdevRating.value);
+                        const printingRating = parseInt(form.elements.printingRating.value);
+                        const chemistryRating = parseInt(form.elements.chemistryRating.value);
+                        const orgRating = parseInt(form.elements.orgRating.value);
+                        const favoriteMoment = form.elements.favoriteMoment.value.trim();
+                        const suggestions = form.elements.suggestions.value.trim();
+
+                        try {
+                          setLoadingCamp(true);
+                          const feedbackDocId = "camp_feedback_" + email.trim().toLowerCase();
+                          await firestoreDb.collection("quiz_submissions").doc(feedbackDocId).set({
+                            type: "camp_feedback",
+                            email: email.trim().toLowerCase(),
+                            fullName: userDoc ? userDoc.fullName : "Participant",
+                            campRating,
+                            stemRating,
+                            calcRating,
+                            contentRating,
+                            careerRating,
+                            roboticsRating,
+                            outingRating,
+                            foodRating,
+                            doctorRating,
+                            webdevRating,
+                            printingRating,
+                            chemistryRating,
+                            orgRating,
+                            favoriteMoment,
+                            suggestions,
+                            createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                          });
+
+                          alert("🎉 Overall camp feedback submitted successfully! Thank you!");
+                          loadParticipantData(email);
+                        } catch (err) {
+                          alert("Error submitting feedback: " + err.message);
+                        } finally {
+                          setLoadingCamp(false);
+                        }
+                      }}
+                      style={{ display: "flex", flexDirection: "column", gap: "20px" }}
+                    >
+                      {/* Grid for Ratings */}
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: "15px" }}>
+                        <div className="form-group-voxel">
+                          <label style={{ color: "var(--mc-yellow)", display: "block", fontSize: "1rem", fontWeight: "bold", marginBottom: "5px" }}>🏆 OVERALL EXPERIENCE</label>
+                          <select name="campRating" required className="mc-input" style={{ width: "100%", padding: "10px", background: "#000", border: "3px solid #555", color: "#fff", fontSize: "1rem" }}>
+                            <option value="5">⭐⭐⭐⭐⭐ Excellent (5/5)</option>
+                            <option value="4">⭐⭐⭐⭐ Very Good (4/5)</option>
+                            <option value="3">⭐⭐⭐ Good (3/5)</option>
+                            <option value="2">⭐⭐ Fair (2/5)</option>
+                            <option value="1">⭐ Poor (1/5)</option>
+                          </select>
+                        </div>
+
+                        <div className="form-group-voxel">
+                          <label style={{ color: "var(--mc-yellow)", display: "block", fontSize: "1rem", fontWeight: "bold", marginBottom: "5px" }}>1️⃣ Day 1: STEM & Logic (Sarri Ayoub)</label>
+                          <select name="stemRating" required className="mc-input" style={{ width: "100%", padding: "10px", background: "#000", border: "3px solid #555", color: "#fff", fontSize: "1rem" }}>
+                            <option value="5">⭐⭐⭐⭐⭐ Excellent (5/5)</option>
+                            <option value="4">⭐⭐⭐⭐ Very Good (4/5)</option>
+                            <option value="3">⭐⭐⭐ Good (3/5)</option>
+                            <option value="2">⭐⭐ Fair (2/5)</option>
+                            <option value="1">⭐ Poor (1/5)</option>
+                          </select>
+                        </div>
+
+                        <div className="form-group-voxel">
+                          <label style={{ color: "var(--mc-yellow)", display: "block", fontSize: "1rem", fontWeight: "bold", marginBottom: "5px" }}>2️⃣ Day 1: Calculator Beat (Walid Henni)</label>
+                          <select name="calcRating" required className="mc-input" style={{ width: "100%", padding: "10px", background: "#000", border: "3px solid #555", color: "#fff", fontSize: "1rem" }}>
+                            <option value="5">⭐⭐⭐⭐⭐ Excellent (5/5)</option>
+                            <option value="4">⭐⭐⭐⭐ Very Good (4/5)</option>
+                            <option value="3">⭐⭐⭐ Good (3/5)</option>
+                            <option value="2">⭐⭐ Fair (2/5)</option>
+                            <option value="1">⭐ Poor (1/5)</option>
+                          </select>
+                        </div>
+
+                        <div className="form-group-voxel">
+                          <label style={{ color: "var(--mc-yellow)", display: "block", fontSize: "1rem", fontWeight: "bold", marginBottom: "5px" }}>3️⃣ Day 2: Scientific Content Creation (Youcef Lezzoum)</label>
+                          <select name="contentRating" required className="mc-input" style={{ width: "100%", padding: "10px", background: "#000", border: "3px solid #555", color: "#fff", fontSize: "1rem" }}>
+                            <option value="5">⭐⭐⭐⭐⭐ Excellent (5/5)</option>
+                            <option value="4">⭐⭐⭐⭐ Very Good (4/5)</option>
+                            <option value="3">⭐⭐⭐ Good (3/5)</option>
+                            <option value="2">⭐⭐ Fair (2/5)</option>
+                            <option value="1">⭐ Poor (1/5)</option>
+                          </select>
+                        </div>
+
+                        <div className="form-group-voxel">
+                          <label style={{ color: "var(--mc-yellow)", display: "block", fontSize: "1rem", fontWeight: "bold", marginBottom: "5px" }}>4️⃣ Day 2: How to Build your Career (Rima Chaabna)</label>
+                          <select name="careerRating" required className="mc-input" style={{ width: "100%", padding: "10px", background: "#000", border: "3px solid #555", color: "#fff", fontSize: "1rem" }}>
+                            <option value="5">⭐⭐⭐⭐⭐ Excellent (5/5)</option>
+                            <option value="4">⭐⭐⭐⭐ Very Good (4/5)</option>
+                            <option value="3">⭐⭐⭐ Good (3/5)</option>
+                            <option value="2">⭐⭐ Fair (2/5)</option>
+                            <option value="1">⭐ Poor (1/5)</option>
+                          </select>
+                        </div>
+
+                        <div className="form-group-voxel">
+                          <label style={{ color: "var(--mc-yellow)", display: "block", fontSize: "1rem", fontWeight: "bold", marginBottom: "5px" }}>5️⃣ Day 3 & 7: Robotics & Electronics (Alaa Djema)</label>
+                          <select name="roboticsRating" required className="mc-input" style={{ width: "100%", padding: "10px", background: "#000", border: "3px solid #555", color: "#fff", fontSize: "1rem" }}>
+                            <option value="5">⭐⭐⭐⭐⭐ Excellent (5/5)</option>
+                            <option value="4">⭐⭐⭐⭐ Very Good (4/5)</option>
+                            <option value="3">⭐⭐⭐ Good (3/5)</option>
+                            <option value="2">⭐⭐ Fair (2/5)</option>
+                            <option value="1">⭐ Poor (1/5)</option>
+                          </select>
+                        </div>
+
+                        <div className="form-group-voxel">
+                          <label style={{ color: "var(--mc-yellow)", display: "block", fontSize: "1rem", fontWeight: "bold", marginBottom: "5px" }}>6️⃣ Day 4: Tipaza Recreational Outing</label>
+                          <select name="outingRating" required className="mc-input" style={{ width: "100%", padding: "10px", background: "#000", border: "3px solid #555", color: "#fff", fontSize: "1rem" }}>
+                            <option value="5">⭐⭐⭐⭐⭐ Excellent (5/5)</option>
+                            <option value="4">⭐⭐⭐⭐ Very Good (4/5)</option>
+                            <option value="3">⭐⭐⭐ Good (3/5)</option>
+                            <option value="2">⭐⭐ Fair (2/5)</option>
+                            <option value="1">⭐ Poor (1/5)</option>
+                          </select>
+                        </div>
+
+                        <div className="form-group-voxel">
+                          <label style={{ color: "var(--mc-yellow)", display: "block", fontSize: "1rem", fontWeight: "bold", marginBottom: "5px" }}>7️⃣ Day 5: Healthy Food (Dr. Hefsa Belazerague)</label>
+                          <select name="foodRating" required className="mc-input" style={{ width: "100%", padding: "10px", background: "#000", border: "3px solid #555", color: "#fff", fontSize: "1rem" }}>
+                            <option value="5">⭐⭐⭐⭐⭐ Excellent (5/5)</option>
+                            <option value="4">⭐⭐⭐⭐ Very Good (4/5)</option>
+                            <option value="3">⭐⭐⭐ Good (3/5)</option>
+                            <option value="2">⭐⭐ Fair (2/5)</option>
+                            <option value="1">⭐ Poor (1/5)</option>
+                          </select>
+                        </div>
+
+                        <div className="form-group-voxel">
+                          <label style={{ color: "var(--mc-yellow)", display: "block", fontSize: "1rem", fontWeight: "bold", marginBottom: "5px" }}>8️⃣ Day 5: Think Like a Doctor (Amira Touileb)</label>
+                          <select name="doctorRating" required className="mc-input" style={{ width: "100%", padding: "10px", background: "#000", border: "3px solid #555", color: "#fff", fontSize: "1rem" }}>
+                            <option value="5">⭐⭐⭐⭐⭐ Excellent (5/5)</option>
+                            <option value="4">⭐⭐⭐⭐ Very Good (4/5)</option>
+                            <option value="3">⭐⭐⭐ Good (3/5)</option>
+                            <option value="2">⭐⭐ Fair (2/5)</option>
+                            <option value="1">⭐ Poor (1/5)</option>
+                          </select>
+                        </div>
+
+                        <div className="form-group-voxel">
+                          <label style={{ color: "var(--mc-yellow)", display: "block", fontSize: "1rem", fontWeight: "bold", marginBottom: "5px" }}>9️⃣ Day 6 & 8: Web Dev & Vibe Coding (Sarri Ayoub)</label>
+                          <select name="webdevRating" required className="mc-input" style={{ width: "100%", padding: "10px", background: "#000", border: "3px solid #555", color: "#fff", fontSize: "1rem" }}>
+                            <option value="5">⭐⭐⭐⭐⭐ Excellent (5/5)</option>
+                            <option value="4">⭐⭐⭐⭐ Very Good (4/5)</option>
+                            <option value="3">⭐⭐⭐ Good (3/5)</option>
+                            <option value="2">⭐⭐ Fair (2/5)</option>
+                            <option value="1">⭐ Poor (1/5)</option>
+                          </select>
+                        </div>
+
+                        <div className="form-group-voxel">
+                          <label style={{ color: "var(--mc-yellow)", display: "block", fontSize: "1rem", fontWeight: "bold", marginBottom: "5px" }}>🔟 Day 8: 3D Printing Fundamentals (Youcef Lezzoum)</label>
+                          <select name="printingRating" required className="mc-input" style={{ width: "100%", padding: "10px", background: "#000", border: "3px solid #555", color: "#fff", fontSize: "1rem" }}>
+                            <option value="5">⭐⭐⭐⭐⭐ Excellent (5/5)</option>
+                            <option value="4">⭐⭐⭐⭐ Very Good (4/5)</option>
+                            <option value="3">⭐⭐⭐ Good (3/5)</option>
+                            <option value="2">⭐⭐ Fair (2/5)</option>
+                            <option value="1">⭐ Poor (1/5)</option>
+                          </select>
+                        </div>
+
+                        <div className="form-group-voxel">
+                          <label style={{ color: "var(--mc-yellow)", display: "block", fontSize: "1rem", fontWeight: "bold", marginBottom: "5px" }}>🧪 Day 9 & 10: Chemistry (Lyna, Sarah, Chaima)</label>
+                          <select name="chemistryRating" required className="mc-input" style={{ width: "100%", padding: "10px", background: "#000", border: "3px solid #555", color: "#fff", fontSize: "1rem" }}>
+                            <option value="5">⭐⭐⭐⭐⭐ Excellent (5/5)</option>
+                            <option value="4">⭐⭐⭐⭐ Very Good (4/5)</option>
+                            <option value="3">⭐⭐⭐ Good (3/5)</option>
+                            <option value="2">⭐⭐ Fair (2/5)</option>
+                            <option value="1">⭐ Poor (1/5)</option>
+                          </select>
+                        </div>
+
+                        <div className="form-group-voxel">
+                          <label style={{ color: "var(--mc-yellow)", display: "block", fontSize: "1rem", fontWeight: "bold", marginBottom: "5px" }}>📋 Camp Organization & Logistics</label>
+                          <select name="orgRating" required className="mc-input" style={{ width: "100%", padding: "10px", background: "#000", border: "3px solid #555", color: "#fff", fontSize: "1rem" }}>
+                            <option value="5">⭐⭐⭐⭐⭐ Excellent (5/5)</option>
+                            <option value="4">⭐⭐⭐⭐ Very Good (4/5)</option>
+                            <option value="3">⭐⭐⭐ Good (3/5)</option>
+                            <option value="2">⭐⭐ Fair (2/5)</option>
+                            <option value="1">⭐ Poor (1/5)</option>
+                          </select>
+                        </div>
+                      </div>
+
+                      <div className="form-group-voxel" style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                        <label style={{ color: "var(--mc-yellow)", display: "block", fontSize: "1rem", fontWeight: "bold" }}>💬 FAVORITE MOMENTS / ACTIVITIES</label>
+                        <textarea 
+                          name="favoriteMoment" 
+                          rows={3} 
+                          className="mc-input"
+                          style={{ width: "100%", padding: "12px", background: "#000", border: "3px solid #555", color: "#fff", fontSize: "1.1rem" }}
+                          placeholder="What did you love the most about QSSC3 2026?..."
+                        />
+                      </div>
+
+                      <div className="form-group-voxel" style={{ display: "flex", flexDirection: "column", gap: "8px" }}>
+                        <label style={{ color: "var(--mc-yellow)", display: "block", fontSize: "1rem", fontWeight: "bold" }}>🚀 SUGGESTIONS FOR THE NEXT EDITION</label>
+                        <textarea 
+                          name="suggestions" 
+                          rows={3} 
+                          className="mc-input"
+                          style={{ width: "100%", padding: "12px", background: "#000", border: "3px solid #555", color: "#fff", fontSize: "1.1rem" }}
+                          placeholder="What can we improve or add next year?..."
+                        />
+                      </div>
+
+                      <button 
+                        type="submit" 
+                        disabled={loadingCamp}
+                        className="mc-button"
+                        style={{ 
+                          width: "100%", 
+                          padding: "16px", 
+                          fontSize: "11px", 
+                          fontFamily: "'Press Start 2P', monospace", 
+                          background: "#22c55e", 
+                          textShadow: "2px 2px 0 #15803d", 
+                          boxShadow: "inset -4px -4px 0 #15803d, inset 4px 4px 0 #4ade80, 4px 4px 0 #000",
+                          marginTop: "15px"
+                        }}
+                      >
+                        {loadingCamp ? "⌛ SUBMITTING..." : "🚀 SUBMIT CAMP FEEDBACK"}
+                      </button>
+                    </form>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Week 1 Feedback Tab */}
