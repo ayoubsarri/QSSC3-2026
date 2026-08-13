@@ -1,58 +1,74 @@
-# 🌟 QSSC³ 2026 — Educational Time Structuring & Gamified Web Platform
+# ⛏️ QSSC³ 2026 — Gamified Educational Platform & Time Structuring System
 
-> **A High-Performance Web Application Built on Cognitive Ergonomics, Time Structuring & Gamified Engagement**  
+> **An Immersive Voxel-Styled Educational Web Ecosystem Built on Behavioral Psychology, XP Gamification & Operational Management**  
 > *Developed for University of Algiers 1 - Faculty of Sciences (Quanta Club)*
 
 [![Live Web Application](https://img.shields.io/badge/Live%20Demo-Firebase%20Hosting-0284c7?style=for-the-badge&logo=firebase)](https://qssc3-d300f.web.app)
 [![React](https://img.shields.io/badge/React-18-blue?style=for-the-badge&logo=react)](https://react.dev)
-[![Architecture](https://img.shields.io/badge/Architecture-Single%20Page%20App-purple?style=for-the-badge)](https://qssc3-d300f.web.app)
-[![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)](LICENSE)
+[![Architecture](https://img.shields.io/badge/Style-Minecraft%20Voxel-green?style=for-the-badge)](https://qssc3-d300f.web.app)
+[![License](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)](LICENSE)
 
 ---
 
-## 📌 Platform Overview & Core Vision
+## 📌 High-Level Platform Overview & Purpose
 
-**QSSC³ 2026** (Quanta Club Summer Camp 3rd Edition) is a modern, single-page educational web platform engineered to transform intensive STEM camps into a structured, engaging, and predictable digital experience.
+**QSSC³ 2026** (Quanta Club Summer Camp 3rd Edition) is a full-stack educational web portal designed to transform intensive academic summer camps into an organized, highly motivating, and gamified digital adventure.
 
-Large-scale events frequently struggle with **cognitive overload, scheduling disorientation, and participant disengagement**. This platform addresses these challenges through **cognitive ergonomics, temporal anchoring, and gamified progress tracking**.
-
----
-
-## 🎨 Design System & Visual Ergonomics
-
-* **Voxel & Dark Glassmorphism Aesthetic**: Deep midnight navy blue (`#023047`) combined with high-contrast amber gold (`#FFB703`) and vibrant cyan (`#0284c7`) visual accents.
-* **Responsive Mobile-First Architecture**: Custom-built responsive layouts optimized for smartphone viewports and desktop displays.
-* **Micro-Animations & Micro-Interactions**: Smooth state transitions, interactive card hover effects, and real-time rank updates to foster user engagement.
+Traditional educational camps often encounter **participant burnout, unequal engagement, and administrative overhead**. QSSC³ solves these challenges by unifying **User (Student) Engagement** and **Admin (Management) Control** into a seamless, voxel-styled digital atmosphere.
 
 ---
 
-## 🎯 Key Platform Modules
+## 🎮 The Minecraft / Voxel Aesthetic & Design Ergonomics
 
-1. **Gamified XP Leaderboard & Ranking System**:
-   * Tracks participant progress across 10 interactive STEM workshop modules.
-   * Visual badge indicators for Top Champions (1st, 2nd, 3rd Place) and Top 10 distinction tiers.
-2. **Temporal Workshop Timeline & Interactive Agenda**:
-   * Structured 10-day event calendar dividing complex subjects into predictable daily milestones:
-     * **Day 1**: Introduction to STEM & Calculator Beat
-     * **Day 2**: Scientific Content Creation & Career Building
-     * **Day 3**: Robotics 101 & Hardware Interfacing
-     * **Day 5**: Healthy Food & Medical Diagnosis
-     * **Day 6**: Beekeeping, Bee Anatomy & Botany 101
-     * **Day 8**: Vibe Coding 101 & AI Tools
-     * **Day 9**: Introduction to 3D Printing & Additive Manufacturing
-     * **Day 10**: The Central Science in Action (Chemistry)
-3. **Digital Certificate Verification Portal**:
-   * Real-time verification engine allowing instant validation of official credentials via unique certificate hashes.
-4. **Interactive Administrative Management Panel**:
-   * Integrated controls for real-time schedule management, XP updates, and portal system monitoring.
+Instead of intimidating, sterile academic interfaces, QSSC³ adopts a nostalgic, vibrant **Minecraft & Voxel Visual Language**:
+
+* **Playful Immersiveness**: Dark navy backgrounds (`#023047`) paired with pixelated block icons, glowing amber gold highlights (`#FFB703`), and vibrant cyan accents (`#0284c7`).
+* **Lowering Cognitive Barriers**: The familiar, game-like design language reduces academic intimidation, making complex STEM concepts, coding, and scientific challenges feel like quest levels.
+* **Micro-Animations & Visual Haptics**: Interactive card hover states, pulsing XP counters, and animated badge unlocks provide continuous tactile feedback.
 
 ---
 
-## 🛠️ Tech Stack & Technologies
+## 🧠 Behavioral Psychology & Gamification Architecture
+
+The core of QSSC³ is built around **Behavioral Psychology and Self-Determination Theory (Autonomy, Competence, and Relatedness)**:
+
+### 1. Experience Points (XP) & Positive Feedback Loops
+* Every workshop activity, challenge, and daily quiz rewards participants with **Experience Points (XP)**. 
+* Instant feedback triggers dopamine release and establishes an intrinsic desire to learn and participate actively.
+
+### 2. Low-Stakes Interactive Quizzes
+* Rather than stressful high-stakes exams, participants engage in interactive, gamified quizzes. This shifts the psychological mindset from "test anxiety" to "quest progression".
+
+### 3. Gamified Reward Badges & Leaderboard
+* Live rank progression (Top Champions & Distinction Badges) provides clear status recognition while fostering healthy team motivation and collective pride ("The QSSC Family").
+
+---
+
+## 🖥️ Platform Modules & Tab Breakdown
+
+QSSC³ is split into two specialized hubs: the **Participant Portal** and the **Admin Control Dashboard**.
+
+### 👤 1. Participant Portal (Student Hub)
+* **Dashboard & Quest Overview**: Real-time personal XP counter, current rank placement, and quick access to daily activities.
+* **Live XP Leaderboard**: Dynamic ranking board showing overall standings, top performers, and badge achievements.
+* **Interactive Quizzes & Challenges**: Embedded quiz modules where students answer questions, receive instant scoring, and earn XP rewards.
+* **Event Schedule & Timeline**: Structured daily rhythm outlining upcoming sessions, locations, and interactive workshops.
+* **Certificate Verification Portal**: Self-service portal where participants can view, verify, and download their official credential certificates.
+
+### ⚙️ 2. Admin Control Dashboard (Management Hub)
+* **Attendance & Roster Management**: Real-time logging of daily participant check-ins and session presence.
+* **XP & Score Dispatcher**: Admin control panel for awarding bonus XP, adjusting quiz scores, and updating leaderboard rankings in real time.
+* **Quiz Creator & Auto-Grader**: Interface for publishing daily quiz challenges and configuring instant automated grading rules.
+* **Participant Database & Access Control**: Centralized overview of participant profiles, distinction awards, and system permissions.
+* **Certificate Management System**: Administrative suite for bulk generating, validating, and issuing official digital certificates.
+
+---
+
+## 🛠️ Tech Stack & Infrastructure
 
 * **Frontend Engine**: HTML5, Vanilla CSS3 Custom Properties, React 18, `@babel/standalone`.
 * **Hosting Infrastructure**: Firebase Hosting with global CDN edge caching.
-* **Performance**: Lightweight client-side bundling, fast page load speeds, optimized asset rendering.
+* **Architecture**: Single Page Application (SPA) with responsive mobile-first layouts.
 
 ---
 
@@ -60,15 +76,15 @@ Large-scale events frequently struggle with **cognitive overload, scheduling dis
 
 ```
 GITHUB_REPO/
-├── public/                            # Web application static assets, styles & scripts
-│   ├── index.html                     # Core Single Page Application HTML entry point
-│   ├── asset-calendar.png             # UI icons & assets
+├── public/                            # Web application static assets, voxel styles & icons
+│   ├── index.html                     # Main Single Page Application HTML entry point
+│   ├── asset-calendar.png             # Voxel UI icons & graphics
 │   ├── asset-chemistry.png
 │   ├── asset-microscope.png
 │   └── asset-team.png
 ├── .firebaserc                        # Firebase target project mapping
 ├── firebase.json                      # Firebase Hosting configuration & rewrite rules
-├── package.json                       # Project dependencies & build configurations
+├── package.json                       # Dependencies & scripts
 └── README.md                          # Platform documentation
 ```
 
@@ -78,7 +94,7 @@ GITHUB_REPO/
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/YOUR_USERNAME/QSSC3-2026.git
+git clone https://github.com/ayoubsarri/QSSC3-2026.git
 cd QSSC3-2026
 ```
 
@@ -95,8 +111,8 @@ npx firebase-tools deploy --only hosting
 
 ---
 
-## 📜 Accreditation & Live Demo
+## 📜 Accreditation & Live Platform
 
-* **Live Platform URL**: [https://qssc3-d300f.web.app](https://qssc3-d300f.web.app)
+* **Live Demo Portal**: [https://qssc3-d300f.web.app](https://qssc3-d300f.web.app)
 * **Organization**: Quanta Club — Faculty of Sciences, University of Algiers 1
 * **Event**: Quanta Club Summer Camp 3rd Edition (QSSC³ 2026)
