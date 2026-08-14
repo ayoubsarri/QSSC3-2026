@@ -6,7 +6,6 @@
 [![Live Web Application](https://img.shields.io/badge/Live%20Demo-Firebase%20Hosting-0284c7?style=for-the-badge&logo=firebase)](https://qssc3-d300f.web.app)
 [![React](https://img.shields.io/badge/React-18-blue?style=for-the-badge&logo=react)](https://react.dev)
 [![Architecture](https://img.shields.io/badge/Style-Minecraft%20Voxel-green?style=for-the-badge)](https://qssc3-d300f.web.app)
-[![License](https://img.shields.io/badge/License-MIT-purple?style=for-the-badge)](LICENSE)
 
 ---
 
